@@ -1,4 +1,5 @@
-﻿using GraphQL.DataLoader;
+﻿using GraphQL.Authorization;
+using GraphQL.DataLoader;
 using GraphQL.Repository.Repositories;
 using GraphQL.Types;
 using System;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace GraphQL.Repository.GraphQL.Types
 {
-   public class RoleType: ObjectGraphType<Entities.Role>
+    [GraphQLAuthorize(Policy = "AdminPolicy")]
+    public class RoleType: ObjectGraphType<Entities.Role>
     {
         public RoleType(MenuRepository menRepository, IDataLoaderContextAccessor dataLoaderAccessor)
         {

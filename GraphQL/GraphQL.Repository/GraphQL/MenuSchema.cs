@@ -1,4 +1,6 @@
-﻿using GraphQL.Types;
+﻿using GraphQL.Authorization;
+using GraphQL.Types;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,9 @@ namespace GraphQL.Repository.GraphQL
 {
     public class MenuSchema : Schema
     {
-        public MenuSchema(IDependencyResolver resolver) : base(resolver)
+        public MenuSchema(IServiceProvider provider) : base(provider)
         {
-            Query = resolver.Resolve<MenuQuery>();
+            Query = provider.GetRequiredService<MenuQuery>();
 
         }
     }

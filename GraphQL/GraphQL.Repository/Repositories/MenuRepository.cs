@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using GraphQL.Authorization;
 
 namespace GraphQL.Repository.Repositories
 {
+
     public class MenuRepository
     {
         public async Task<ILookup<int, RoleNavigationMenu>> GetRoleNavigationMenus(IEnumerable<int> navigationIds)
@@ -18,6 +20,7 @@ namespace GraphQL.Repository.Repositories
                 return result.ToLookup(r => r.NavigationMenuId);
             }
         }
+
 
         public async Task<List<NavigationMenu>> GetNavigationMenus(int applicationId)
         {

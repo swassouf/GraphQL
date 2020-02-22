@@ -8,12 +8,15 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+//using GraphQL.Server.Authorization.AspNetCore;
 
 namespace GraphQL.Repository.GraphQL
 {
-    [GraphQLAuthorize(Policy = "AUTHORIZED")]
+
+    [GraphQLAuthorize(Policy = "AdminPolicy")]
     public class MenuQuery : ObjectGraphType
     {
+      
         public MenuQuery(MenuRepository menuRepository)
         {
             Field<ListGraphType<NavigationMenuType>>(
@@ -21,11 +24,14 @@ namespace GraphQL.Repository.GraphQL
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "applicationId" }),
                 resolve: context =>
                 {
-                    var user = (ClaimsPrincipal)context.UserContext;
-                   
+                    //var user = (ClaimsPrincipal)context.UserContext;
+
                     var applicationId = context.GetArgument<int>("applicationId");
                     return menuRepository.GetNavigationMenus(applicationId);
                 });
+
         }
+ 
+        
     }
 }

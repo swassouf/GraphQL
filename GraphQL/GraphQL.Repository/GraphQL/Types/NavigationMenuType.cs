@@ -1,4 +1,5 @@
-﻿using GraphQL.DataLoader;
+﻿using GraphQL.Authorization;
+using GraphQL.DataLoader;
 using GraphQL.Repository.Entities;
 using GraphQL.Repository.Repositories;
 using GraphQL.Types;
@@ -10,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace GraphQL.Repository.GraphQL.Types
 {
-  public  class NavigationMenuType : ObjectGraphType<NavigationMenu>
+
+    [GraphQLAuthorize(Policy = "AdminPolicy")]
+    public  class NavigationMenuType : ObjectGraphType<NavigationMenu>
     {
       public NavigationMenuType(MenuRepository menuRepository, IDataLoaderContextAccessor dataLoaderAccessor)
         {
